@@ -7,7 +7,7 @@
 
 ## Descrição
 
-Criação de uma Landing Page atrativa para os usuários, Além de um menu hambúrguer para a versão mobile e carroselde imagens para exibição das ultimas postagens no blog estático. A mesma foi desenvolvida baseado no layout que foi disponibilizado por uma empresa com objetivo de teste pratico de habilidades para uma vaga de desenvolvedor front-end. 
+Criação de um formulario basico de cadastramento que incluir os campos nome, data de nascimento, cpf, cep, endereço, Bairro, Estado, Uf e complemento. alem disso existe validação de campos e busca de cep utilizado uma api. 
 
 ## Desafio proposto
 
