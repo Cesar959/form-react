@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css'
 
 function App() {
 
+  // fields
   const [name, Setname] = useState('')
   const [date, Setdate] = useState(0)
   const [cpf, Setcpf] = useState('')
@@ -14,106 +15,359 @@ function App() {
   const [complement, Setcomplement] = useState('')
 
 
+  // alert
+  const alertSucesso = useRef(0)
+  const alertErro = useRef(0)
+  const alertName = useRef(0)
+  const alertData = useRef(0)
+  const alertCPF = useRef(0)
+  const alertCode = useRef(0)
+  const alertCodeInvalide = useRef(0)
+  const alertAddress = useRef(0)
+  const alertDistrict = useRef(0)
+  const alertEstado = useRef(0)
+  const alertUF = useRef(0)
+  const alertComplement = useRef(0)
+
+  // class
+  const [className, setClassName] = useState('')
+  const [classData, setClassData] = useState('')
+  const [classCPF, setClassCPF] = useState('')
+  const [classCode, setClassCode] = useState('')
+  const [classAddress, setClassAddress] = useState('')
+  const [classDistrict, setClassDistrict] = useState('')
+  const [classEstado, setClassEstado] = useState('')
+  const [classUF, setClassUF] = useState('')
+  const [classComplement, setClassComplement] = useState('')
+
+
+  // Busca de CEP pelos correios
   function Searchcode()
   {
-    let Valuecode = document.getElementById('code').value.replace('-', '')
+    let Valuecode = code.replace('-', '')
 
     if(Valuecode == "" || Valuecode == null)
     {
-      document.getElementById('alert-code-invalido').style.display='block'
-      document.getElementById('code').classList.add('active')
+      alertCodeInvalide.current.style.display = "block"
+      setClassCode('active')
     }
     else 
     {
       fetch(`https://viacep.com.br/ws/${Valuecode}/json/`)
       .then((resp) => resp.json())
       .then(function(response){
-  
-        document.getElementById('address').value = response.logradouro
-        document.getElementById('district').value = response.bairro
-        document.getElementById('estado').value = response.localidade
-        document.getElementById('uf').value = response.uf
 
         Setaddress(response.logradouro)
         Setdistrict(response.bairro)
         Setestado(response.localidade)
         Setuf(response.uf)
 
-
-        document.getElementById('alert-code-invalido').style.display='none'
-        document.getElementById('code').classList.remove('active')
+        setClassCode('')
+        alertCodeInvalide.current.style.display = "none"
       })
       .catch(function(erro) {
-        document.getElementById('alert-code-invalido').style.display='block'
-        document.getElementById('code').classList.add('active')
+        alertCodeInvalide.current.style.display = "block"
+        setClassCode('active')
       });
     }
   }
 
-  function alert(field = Text, arrayfields = Array)
-  {
-    document.getElementById(`alert-${field}`).style.display='block'
-    document.getElementById(`${field}`).classList.add('active')
-
-    arrayfields.map((element)=> {
-      document.getElementById(`alert-${element}`).style.display='none'
-      document.getElementById(`${element}`).classList.remove('active')
-    })
-  }
-
-  function Messageresult(field = Text, arrayfields = Array)
-  {
-    document.getElementById(`alert-${field}`).style.display='block'
-
-    arrayfields.map((element)=> {
-      document.getElementById(`alert-${element}`).style.display='none'
-      document.getElementById(`${element}`).classList.remove('active')
-    })
-  }
-
+  // Envio do formularios
   function Submit()
   {
     if(name == ""|| name == null)
     {
-      alert('name', Array('date', 'cpf', 'code', 'address', 'district', 'estado', 'uf', 'complement'))
+
+      alertName.current.style.display='block'
+      setClassName('active')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
+
     }
     else if(date == ""|| date == null)
     {
-      alert('date', Array('name', 'cpf', 'code', 'address', 'district', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='block'
+      setClassData('active')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(cpf == ""|| cpf == null)
     {
-      alert('cpf', Array('name', 'date', 'code', 'address', 'district', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='block'
+      setClassCPF('active')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(code == ""|| code == null)
     {
-      alert('code', Array('name', 'date', 'cpf', 'address', 'district', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='block'
+      setClassCode('active')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(address == ""|| address == null)
     {
-      alert('address', Array('name', 'date', 'cpf', 'code', 'district', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='block'
+      setClassAddress('active')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(district == ""|| district == null)
     {
-      alert('district', Array('name', 'date', 'cpf', 'code', 'address', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='block'
+      setClassDistrict('active')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(estado == ""|| estado == null)
     {
-      alert('estado', Array('name', 'date', 'cpf', 'code', 'address', 'district', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='block'
+      setClassEstado('active')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(uf == ""|| uf == null)
     {
-      alert('uf', Array('name', 'date', 'cpf', 'code', 'address', 'district', 'estado', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='block'
+      setClassUF('active')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('')
     }
     else if(complement == ""|| complement == null)
     {
-      alert('complement', Array('name', 'date', 'cpf', 'code', 'address', 'district', 'estado', 'uf'))
+      alertName.current.style.display='none'
+      setClassName('')
+
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='block'
+      setClassComplement('active')
     }
     else
     {
-       Messageresult('sucesso', Array('name', 'date', 'cpf', 'code', 'address', 'district', 'estado', 'uf', 'complement'))
+      alertName.current.style.display='none'
+      setClassName('')
 
-       const dados = {
+      alertData.current.style.display='none'
+      setClassData('')
+
+      alertCPF.current.style.display='none'
+      setClassCPF('')
+
+      alertCode.current.style.display='none'
+      setClassCode('')
+
+      alertAddress.current.style.display='none'
+      setClassAddress('')
+
+      alertDistrict.current.style.display='none'
+      setClassDistrict('')
+
+      alertEstado.current.style.display='none'
+      setClassEstado('')
+
+      alertUF.current.style.display='none'
+      setClassUF('')
+
+      alertComplement.current.style.display='none'
+      setClassComplement('none')
+
+      const dados = {
          name: name,
          Nascimento: date,
          cpf: cpf,
@@ -127,14 +381,14 @@ function App() {
 
        if (typeof(Storage) !== "undefined") 
        {
-        document.getElementById('alert-erro').style.display="none"
-        document.getElementById('alert-sucesso').style.display="block"
+        alertErro.current.style.display = 'none'
+        alertSucesso.current.style.display = 'block'
         window.localStorage.setItem('dados', JSON.stringify(dados));
        }
        else
        {
-        document.getElementById('alert-erro').style.display="block"
-        document.getElementById('alert-sucesso').style.display="none"
+        alertSucesso.current.style.display = 'none'
+        alertErro.current.style.display = 'block'
        }
     }
   }
@@ -145,37 +399,37 @@ function App() {
       <form>
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='Nome' id='name' onChange={(e)=>{Setname(e.target.value)}}/>
-            <div className='message-alert' id='alert-name'>O campo nome é obrigatorio</div>
+            <input type="text" placeholder='Nome' className={className} id='name' onChange={(e)=>{Setname(e.target.value)}}/>
+            <div className='message-alert' id='alert-name' ref={alertName}>O campo nome é obrigatorio</div>
           </div>
           <div className='cell-quite'>
-            <input type="text" className='date' id='date' placeholder='Data de Nascimento' onChange={(e)=>{Setdate(e.target.value)}}/>
-            <div className='message-alert' id='alert-date'>O campo data de nascimento é obrigatorio</div>
+            <input type="text" className={'date ' + classData} id='date' placeholder='Data de Nascimento' onChange={(e)=>{Setdate(e.target.value)}}/>
+            <div className='message-alert' id='alert-date' ref={alertData}>O campo data de nascimento é obrigatorio</div>
           </div>
         </div>
 
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='CPF' className='cpf' id='cpf' onChange={(e)=>{Setcpf(e.target.value)}}/>
-            <div className='message-alert' id='alert-cpf'>O campo CPF é obrigatorio</div>
+            <input type="text" placeholder='CPF' className={'cpf ' + classCPF} id='cpf' onChange={(e)=>{Setcpf(e.target.value)}}/>
+            <div className='message-alert' id='alert-cpf' ref={alertCPF}>O campo CPF é obrigatorio</div>
           </div>
           <div className='cell-quite'>
-            <input type="text" className='code' placeholder='Cep' id='code' onBlur={()=>{Searchcode()}} onChange={(e)=>{Setcode(e.target.value)}}/>
-            <div className='message-alert' id='alert-code'>O campo cep é obrigatorio</div>
-            <div className='message-alert' id='alert-code-invalido'>cep invalido</div>
+            <input type="text" className={'code ' + classCode} placeholder='Cep' id='code' onBlur={()=>{Searchcode()}} onChange={(e)=>{Setcode(e.target.value)}}/>
+            <div className='message-alert' id='alert-code' ref={alertCode}>O campo cep é obrigatorio</div>
+            <div className='message-alert' id='alert-code-invalido' ref={alertCodeInvalide}>cep invalido</div>
           </div>
         </div>
 
         <div className='cell-complete'>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='address' disabled id='address'/>
-            <div className='message-alert' id='alert-address'>O campo endereço é obrigatorio</div>
+            <input type="text" placeholder='address' className={classAddress} value={address} disabled id='address'/>
+            <div className='message-alert' id='alert-address' ref={alertAddress}>O campo endereço é obrigatorio</div>
           </div>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='Bairro' disabled id='district'/>
-            <div className='message-alert' id='alert-district'>O campo bairro é obrigatorio</div>
+            <input type="text" placeholder='Bairro' className={classDistrict} value={district} disabled id='district'/>
+            <div className='message-alert' id='alert-district' ref={alertDistrict}>O campo bairro é obrigatorio</div>
           </div>
 
         </div>
@@ -183,26 +437,26 @@ function App() {
         <div className='cell-complete'>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='Estado' disabled id='estado'/>
-            <div className='message-alert' id='alert-estado'>O campo estado é obrigatorio</div>
+            <input type="text" placeholder='Estado' className={classEstado} value={estado} disabled id='estado'/>
+            <div className='message-alert' id='alert-estado' ref={alertEstado}>O campo estado é obrigatorio</div>
           </div>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='UF' disabled id='uf'/>
-            <div className='message-alert' id='alert-uf'>O campo uf é obrigatorio</div>
+            <input type="text" placeholder='UF' className={classUF} value={uf} disabled id='uf'/>
+            <div className='message-alert' id='alert-uf' ref={alertUF}>O campo uf é obrigatorio</div>
           </div>
 
         </div>
 
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='Complemento' id='complement' onChange={(e)=>{Setcomplement(e.target.value)}}/>
-            <div className='message-alert' id='alert-complement'>O campo complemento é obrigatorio</div>
+            <input type="text" placeholder='Complemento' id='complement' className={classComplement} onChange={(e)=>{Setcomplement(e.target.value)}}/>
+            <div className='message-alert' id='alert-complement' ref={alertComplement}>O campo complemento é obrigatorio</div>
           </div>
         </div>
 
-        <div className='finalizacao-cadastro' id='alert-sucesso'>Cadastro realizado com Sucesso!</div>
-        <div className='finalizacao-cadastro' id='alert-erro'>Opss não foi possivel realizar o cadastro!</div>
+        <div className='finalizacao-cadastro' id='alert-sucesso' ref={alertSucesso}>Cadastro realizado com Sucesso!</div>
+        <div className='finalizacao-cadastro' id='alert-erro' ref={alertErro}>Opss não foi possivel realizar o cadastro!</div>
 
         <div className='group-button'>
           <a href='index.html'>cancelar</a>
