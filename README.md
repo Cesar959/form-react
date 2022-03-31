@@ -7,7 +7,7 @@
 
 ## Descrição
 
-Criação de um formulario basico de cadastramento que incluir os campos nome, data de nascimento, cpf, cep, endereço, Bairro, Estado, Uf e complemento. alem disso existe validação de campos e busca de cep utilizado uma api. 
+Criação de um formulario basico de cadastramento que incluir os campos nome, data de nascimento, cpf, cep, endereço, Bairro, Estado, Uf e complemento, alem disso existe validação de campos e busca de cep utilizado uma api online que possiblitar fazer o autocomplete do endereço. O layout foi desenvolvido por eu mesmo utilizando o figma.  
 
 ## Desafio proposto
 

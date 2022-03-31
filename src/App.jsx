@@ -399,37 +399,37 @@ function App() {
       <form>
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='Nome' className={className} id='name' onChange={(e)=>{Setname(e.target.value)}}/>
-            <div className='message-alert' id='alert-name' ref={alertName}>O campo nome é obrigatorio</div>
+            <input type="text" placeholder='Nome' className={className} onChange={(e)=>{Setname(e.target.value)}}/>
+            <div className='message-alert' ref={alertName}>O campo nome é obrigatorio</div>
           </div>
           <div className='cell-quite'>
-            <input type="text" className={'date ' + classData} id='date' placeholder='Data de Nascimento' onChange={(e)=>{Setdate(e.target.value)}}/>
-            <div className='message-alert' id='alert-date' ref={alertData}>O campo data de nascimento é obrigatorio</div>
+            <input type="text" className={'date ' + classData} placeholder='Data de Nascimento' onChange={(e)=>{Setdate(e.target.value)}}/>
+            <div className='message-alert' ref={alertData}>O campo data de nascimento é obrigatorio</div>
           </div>
         </div>
 
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='CPF' className={'cpf ' + classCPF} id='cpf' onChange={(e)=>{Setcpf(e.target.value)}}/>
-            <div className='message-alert' id='alert-cpf' ref={alertCPF}>O campo CPF é obrigatorio</div>
+            <input type="text" placeholder='CPF' className={'cpf ' + classCPF} onChange={(e)=>{Setcpf(e.target.value)}}/>
+            <div className='message-alert'  ref={alertCPF}>O campo CPF é obrigatorio</div>
           </div>
           <div className='cell-quite'>
             <input type="text" className={'code ' + classCode} placeholder='Cep' id='code' onBlur={()=>{Searchcode()}} onChange={(e)=>{Setcode(e.target.value)}}/>
-            <div className='message-alert' id='alert-code' ref={alertCode}>O campo cep é obrigatorio</div>
-            <div className='message-alert' id='alert-code-invalido' ref={alertCodeInvalide}>cep invalido</div>
+            <div className='message-alert' ref={alertCode}>O campo cep é obrigatorio</div>
+            <div className='message-alert' ref={alertCodeInvalide}>cep invalido</div>
           </div>
         </div>
 
         <div className='cell-complete'>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='address' className={classAddress} value={address} disabled id='address'/>
-            <div className='message-alert' id='alert-address' ref={alertAddress}>O campo endereço é obrigatorio</div>
+            <input type="text" placeholder='Endereço' className={classAddress} value={address} disabled />
+            <div className='message-alert' ref={alertAddress}>O campo endereço é obrigatorio</div>
           </div>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='Bairro' className={classDistrict} value={district} disabled id='district'/>
-            <div className='message-alert' id='alert-district' ref={alertDistrict}>O campo bairro é obrigatorio</div>
+            <input type="text" placeholder='Bairro' className={classDistrict} value={district} disabled />
+            <div className='message-alert' ref={alertDistrict}>O campo bairro é obrigatorio</div>
           </div>
 
         </div>
@@ -437,8 +437,8 @@ function App() {
         <div className='cell-complete'>
 
           <div className='cell-quite'>
-            <input type="text" placeholder='Estado' className={classEstado} value={estado} disabled id='estado'/>
-            <div className='message-alert' id='alert-estado' ref={alertEstado}>O campo estado é obrigatorio</div>
+            <input type="text" placeholder='Estado' className={classEstado} value={estado} disabled />
+            <div className='message-alert' ref={alertEstado}>O campo estado é obrigatorio</div>
           </div>
 
           <div className='cell-quite'>
@@ -450,8 +450,8 @@ function App() {
 
         <div className='cell-complete'>
           <div className='cell-quite'>
-            <input type="text" placeholder='Complemento' id='complement' className={classComplement} onChange={(e)=>{Setcomplement(e.target.value)}}/>
-            <div className='message-alert' id='alert-complement' ref={alertComplement}>O campo complemento é obrigatorio</div>
+            <input type="text" placeholder='Complemento' className={classComplement} onChange={(e)=>{Setcomplement(e.target.value)}}/>
+            <div className='message-alert' ref={alertComplement}>O campo complemento é obrigatorio</div>
           </div>
         </div>
 
